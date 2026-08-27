@@ -12,11 +12,11 @@ import java.util.Date;
 import java.util.UUID;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
-@Table(name="Books")
+@Getter // Génère les getters automatiquement
+@Setter // Génère les setters automatiquement
+@NoArgsConstructor // Génère un constructeur vide
+@AllArgsConstructor // Génère un constructeur plein
+@Table(name="book")
 public class BookEntity {
 
     @Id

@@ -6,7 +6,7 @@ import jakarta.persistence.*;
 import java.util.UUID;
 
 @Entity
-@Table(name = "Users")
+@Table(name = "users")
 public class UserEntity {
 
     @Id
@@ -25,9 +25,10 @@ public class UserEntity {
             unique = true)
     private String email;
 
+    // constructeur vide (ça sert toujours)
     public UserEntity() {
     }
-
+    // constructeur plein
     public UserEntity(@Nonnull String name, @Nonnull String email, @Nonnull String password) {
         this.name = name;
         this.email = email;
