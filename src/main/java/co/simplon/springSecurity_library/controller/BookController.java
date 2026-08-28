@@ -2,6 +2,7 @@ package co.simplon.springSecurity_library.controller;
 
 import co.simplon.springSecurity_library.entity.BookEntity;
 import co.simplon.springSecurity_library.repository.BookRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,6 +30,13 @@ public class BookController {
     public Optional<BookEntity> getOneBook(@PathVariable UUID id) {
         return this.bookRepository.findById(id);
     }
+
+    @PostMapping("")
+    @ResponseStatus(HttpStatus.CREATED)
+    public BookEntity createBook(@RequestBody BookEntity book) {
+        return this.bookRepository.save(book);
+    }
+
 
 
 
