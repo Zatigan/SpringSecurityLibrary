@@ -2,13 +2,9 @@ package co.simplon.springSecurity_library.entity;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
-
-import java.util.Date;
+import java.time.Year;
 import java.util.UUID;
 
 @Entity
@@ -16,6 +12,7 @@ import java.util.UUID;
 @Setter // Génère les setters automatiquement
 @NoArgsConstructor // Génère un constructeur vide
 @AllArgsConstructor // Génère un constructeur plein
+@Builder
 @Table(name="book")
 public class BookEntity {
 
@@ -39,12 +36,11 @@ public class BookEntity {
     private String category;
 
     @Nonnull
-    @Column(length = 8,
+    @Column(length = 4,
             nullable = false)
-    private Date publishedYear;
+    private Year publishedYear;
 
-    @Nonnull
     @Column
     @ColumnDefault("1")
-    private Byte availableCopies;
+    private Byte availableCopies = 1;
 }

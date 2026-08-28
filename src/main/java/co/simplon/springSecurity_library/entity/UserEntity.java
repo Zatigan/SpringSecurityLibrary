@@ -17,7 +17,7 @@ public class UserEntity {
     @Column(length = 100,
             nullable = false, // Indication côté bdd que le champ ne peut pas être null
             unique = true)  // Indication que chaque valeur sera unique
-    private String name;
+    private String username;
 
     @Nonnull
     @Column(length = 100,
@@ -29,8 +29,8 @@ public class UserEntity {
     public UserEntity() {
     }
     // constructeur plein
-    public UserEntity(@Nonnull String name, @Nonnull String email, @Nonnull String password) {
-        this.name = name;
+    public UserEntity(@Nonnull String username, @Nonnull String email, @Nonnull String password) {
+        this.username = username;
         this.email = email;
         this.password = password;
     }
@@ -45,12 +45,12 @@ public class UserEntity {
     }
 
     @Nonnull
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(@Nonnull String name) {
-        this.name = name;
+    public void setName(@Nonnull String username) {
+        this.username = username;
     }
 
     @Nonnull
