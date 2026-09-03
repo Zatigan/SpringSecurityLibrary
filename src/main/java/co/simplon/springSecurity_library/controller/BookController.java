@@ -1,12 +1,14 @@
 package co.simplon.springSecurity_library.controller;
 
+import co.simplon.springSecurity_library.dto.BookResponseDTO;
 import co.simplon.springSecurity_library.entity.BookEntity;
+import co.simplon.springSecurity_library.mappers.BookMapper;
 import co.simplon.springSecurity_library.repository.BookRepository;
+import co.simplon.springSecurity_library.service.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @RestController
@@ -14,21 +16,26 @@ import java.util.UUID;
 public class BookController {
 
     private final BookRepository bookRepository;
+    private final BookService bookService;
 
     // Constructeur du controller pour pouvoir l'utiliser ensuite
-    public BookController(BookRepository bookRepositoryInjected) {
+    public BookController(BookRepository bookRepositoryInjected,
+                          BookService bookServiceInjected) {
         this.bookRepository = bookRepositoryInjected;
+        this.bookService = bookServiceInjected;
     }
 
     @GetMapping("")
-    public List<BookEntity> getAll() {
-        return this.bookRepository.findAll();
+    public List<BookResponseDTO> getAll() {
+        // Pour respecter la séparation des rôles, le Controller se contente
+        // d'appeler le bookService qui contient la logique métier
+        return bookService.getAllBooks();
     }
 
     @GetMapping("/{id}") // Paramètre indiqué entre {} car c'est variable
     // PathVariable car c'est directement dans l'URL sans '?' (sinon ce serait un queryParams)
-    public Optional<BookEntity> getOneBook(@PathVariable UUID id) {
-        return this.bookRepository.findById(id);
+    public BookResponseDTO getOneBook(@PathVariable UUID id) {
+        return bookService.getOneBook(id);
     }
 
     @PostMapping("")

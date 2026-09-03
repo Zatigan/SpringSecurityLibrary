@@ -8,7 +8,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Repository
-public interface BookRepository extends JpaRepository<BookEntity, String> {
-
-    public Optional<BookEntity> findById(UUID id);
+public interface BookRepository extends JpaRepository<BookEntity, UUID> {
+    // Pas besoin d'écrire les méthods les plus simples en SQL ici.
+    // JpaRepository en fourni déjà un certain nombre par défaut
 }
