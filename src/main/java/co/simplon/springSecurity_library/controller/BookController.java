@@ -49,7 +49,6 @@ public class BookController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    // Version brutasse sans retour utilisateur
     public void deleteBook(@PathVariable UUID id) {
         bookService.deleteBook(id);
     }
