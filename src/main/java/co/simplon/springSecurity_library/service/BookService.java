@@ -1,7 +1,7 @@
 package co.simplon.springSecurity_library.service;
 
 import co.simplon.springSecurity_library.dto.BookInputDto;
-import co.simplon.springSecurity_library.dto.BookResponseDTO;
+import co.simplon.springSecurity_library.dto.BookResponseDto;
 import co.simplon.springSecurity_library.entity.BookEntity;
 import co.simplon.springSecurity_library.exceptions.BookNotFoundException;
 import co.simplon.springSecurity_library.mappers.BookMapper;
@@ -23,20 +23,20 @@ public class BookService {
         this.bookMapper = bookMapperInjected;
     }
 
-    public List<BookResponseDTO> getAllBooks() {
+    public List<BookResponseDto> getAllBooks() {
         List<BookEntity> allBooks = bookRepository.findAll();
         return allBooks.stream()
                 .map(book -> bookMapper.fromEntityToDto(book))
                 .toList();
     }
 
-    public BookResponseDTO getOneBook(UUID id) {
+    public BookResponseDto getOneBook(UUID id) {
         BookEntity book = bookRepository.findById(id)
                 .orElseThrow();
         return bookMapper.fromEntityToDto(book);
     }
 
-    public BookResponseDTO updateBook(UUID id, BookInputDto submittedBook) {
+    public BookResponseDto updateBook(UUID id, BookInputDto submittedBook) {
         BookEntity bookToUpdate = bookRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("Identifiant invalide, livre non trouvé"));
         // Utilisation d'une erreur déjà prévue par Java / Spring
@@ -48,7 +48,7 @@ public class BookService {
         return bookMapper.fromEntityToDto(saveBook);
     }
 
-    public BookResponseDTO addOneBook(BookInputDto submittedBook) {
+    public BookResponseDto addOneBook(BookInputDto submittedBook) {
         BookEntity newBook = bookMapper.fromDtoToEntity(submittedBook);
 
         BookEntity saveBook = bookRepository.save(newBook);

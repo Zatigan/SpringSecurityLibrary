@@ -1,7 +1,7 @@
 package co.simplon.springSecurity_library.controller;
 
 import co.simplon.springSecurity_library.dto.BookInputDto;
-import co.simplon.springSecurity_library.dto.BookResponseDTO;
+import co.simplon.springSecurity_library.dto.BookResponseDto;
 import co.simplon.springSecurity_library.service.BookService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -21,7 +21,7 @@ public class BookController {
     }
 
     @GetMapping("")
-    public List<BookResponseDTO> getAll() {
+    public List<BookResponseDto> getAll() {
         // Pour respecter la séparation des rôles, le Controller se contente
         // d'appeler le bookService qui contient la logique métier
         return bookService.getAllBooks();
@@ -29,19 +29,19 @@ public class BookController {
 
     @GetMapping("/{id}") // Paramètre indiqué entre {} car c'est variable
     // PathVariable car c'est directement dans l'URL sans '?' (sinon ce serait un queryParams)
-    public BookResponseDTO getOneBook(@PathVariable UUID id) {
+    public BookResponseDto getOneBook(@PathVariable UUID id) {
         return bookService.getOneBook(id);
     }
 
     @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public BookResponseDTO createBook(@RequestBody BookInputDto book) { //possiblement c'est unn bookCreationDTO plutôt que un bookENtity (logique de protection oblige)
+    public BookResponseDto createBook(@RequestBody BookInputDto book) { //possiblement c'est unn bookCreationDTO plutôt que un bookENtity (logique de protection oblige)
         return bookService.addOneBook(book);
     }
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.ACCEPTED)
-    public BookResponseDTO updateBook(
+    public BookResponseDto updateBook(
             @RequestBody BookInputDto updatedBook,
             @PathVariable UUID id) {
         return bookService.updateBook(id, updatedBook);

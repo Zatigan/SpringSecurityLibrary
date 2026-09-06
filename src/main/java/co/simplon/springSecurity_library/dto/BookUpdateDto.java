@@ -1,4 +1,4 @@
 package co.simplon.springSecurity_library.dto;
 
-public record BookUpdateDTO() {
+public record BookUpdateDto() {
 }
