@@ -1,15 +1,15 @@
 package co.simplon.springSecurity_library.mappers;
 
 import co.simplon.springSecurity_library.dto.BookInputDto;
-import co.simplon.springSecurity_library.dto.BookResponseDTO;
+import co.simplon.springSecurity_library.dto.BookResponseDto;
 import co.simplon.springSecurity_library.entity.BookEntity;
 import org.springframework.stereotype.Component;
 
 @Component
 public class BookMapper {
 
-    public BookResponseDTO fromEntityToDto(BookEntity book) {
-        return new BookResponseDTO(
+    public BookResponseDto fromEntityToDto(BookEntity book) {
+        return new BookResponseDto(
                 book.getId(),
                 book.getTitle(),
                 book.getAuthor(),
