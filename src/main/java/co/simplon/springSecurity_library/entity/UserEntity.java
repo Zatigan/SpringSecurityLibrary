@@ -2,12 +2,17 @@ package co.simplon.springSecurity_library.entity;
 
 import jakarta.annotation.Nonnull;
 import jakarta.persistence.*;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Entity
 @Table(name = "users")
-public class UserEntity {
+public class UserEntity implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -24,6 +29,8 @@ public class UserEntity {
             nullable = false,
             unique = true)
     private String email;
+
+    private Collection<? extends GrantedAuthority> authorities;
 
     // constructeur vide (ça sert toujours)
     public UserEntity() {
@@ -49,7 +56,7 @@ public class UserEntity {
         return username;
     }
 
-    public void setName(@Nonnull String username) {
+    public void setUsername(@Nonnull String username) {
         this.username = username;
     }
 
@@ -69,5 +76,16 @@ public class UserEntity {
 
     public void setPassword(@Nonnull String password) {
         this.password = password;
+    }
+
+    // Override obligatoire pour pouvoir gérer les rôles (nommer authorities par SpringSecurity
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        // permet à Spring Security de connaître les roles de l'utilisateur
+        return this.authorities;
+    }
+
+    public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
+        this.authorities = authorities;
     }
 }
